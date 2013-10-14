@@ -63,10 +63,7 @@ def get_primes(n):
         if not less_than_2(trial) and (is_odd(trial) or trial == 2) and not has_prime_factors(trial, primes) and not has_brute_force_factors(trial):
             primes.append(trial)
 
-        if trial < 3:
-            trial += 1
-        else:
-            trial += 2
+        trial = advance_trial(trial)
     
     return primes
 
