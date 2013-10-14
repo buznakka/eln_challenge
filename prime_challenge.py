@@ -9,8 +9,8 @@ def get_n():
     else:
         return int(sys.argv[1])
 
-def test_is_odd():
-    return is_odd(1) and not is_odd(0)
+def test_is_even():
+    return is_even(0) and not is_even(1)
 
 def test_has_prime_factors():
     return has_prime_factors(100, [2,3,5,7]) and not has_prime_factors(7, [2,3,5])
@@ -28,10 +28,10 @@ def test_get_primes():
     return get_primes(0) == [] and get_primes(1) == [2] and get_primes(2) == [2,3] and get_primes(10) == [2,3,5,7,11,13,17,19,23,29]
     
 def tests_work():
-    return test_less_than_2() and test_is_odd() and test_has_prime_factors() and test_has_brute_force_factors() and test_advance_trial() and test_get_primes()
+    return test_less_than_2() and test_is_even() and test_has_prime_factors() and test_has_brute_force_factors() and test_advance_trial() and test_get_primes()
     
-def is_odd(num):
-    return num % 2 == 1
+def is_even(num):
+    return num % 2 == 0
 
 def has_prime_factors(num, divisors):
     for divisor in divisors:
@@ -60,7 +60,15 @@ def get_primes(n):
     primes = []
     trial = 0
     while len(primes) < n:
-        if not less_than_2(trial) and (is_odd(trial) or trial == 2) and not has_prime_factors(trial, primes) and not has_brute_force_factors(trial):
+        if less_than_2(trial):
+            pass
+        elif is_even(trial) and trial != 2:
+            pass
+        elif has_prime_factors(trial, primes):
+            pass
+        elif has_brute_force_factors(trial):
+            pass
+        else:
             primes.append(trial)
 
         trial = advance_trial(trial)
