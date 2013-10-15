@@ -19,7 +19,7 @@ def test_less_than_2():
     return less_than_2(1) and not less_than_2(2) and not less_than_2(3)
 
 def test_has_brute_force_factors():
-    return has_brute_force_factors(10) and not has_brute_force_factors(97)
+    return has_brute_force_factors(24, [2,3]) and not has_brute_force_factors(97, [2,3,5,7])
 
 def test_advance_trial():
     return advance_trial(2) == 3 and advance_trial(3) == 5
@@ -42,9 +42,11 @@ def has_prime_factors(num, divisors):
 def less_than_2(num):
     return num < 2
 
-def has_brute_force_factors(num):
+def has_brute_force_factors(num, primes):
     limit = int(math.sqrt(num))
     for divisor in range(2, limit + 1):
+        if divisor in primes:
+            continue
         if num % divisor == 0:
             return 1
 
@@ -59,6 +61,7 @@ def advance_trial(num):
 def get_primes(n):
     primes = []
     trial = 0
+
     while len(primes) < n:
         if less_than_2(trial):
             pass
@@ -66,7 +69,7 @@ def get_primes(n):
             pass
         elif has_prime_factors(trial, primes):
             pass
-        elif has_brute_force_factors(trial):
+        elif has_brute_force_factors(trial, primes):
             pass
         else:
             primes.append(trial)
